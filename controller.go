@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"path/filepath"
 
 	"github.com/360EntSecGroup-Skylar/excelize"
@@ -38,6 +39,10 @@ func registerRoutes() *gin.Engine {
 		}
 		for _, row := range xlsx.GetRows("Prop add") {
 			log.Printf("%v", row)
+		}
+		e := os.Remove("./excelfiles/" + newFileName)
+		if e != nil {
+			log.Fatal(e)
 		}
 	})
 	return r
